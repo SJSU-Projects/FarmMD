@@ -1,3 +1,4 @@
+This is an IoT system, sponsored by a Start up company, 'foris.io' in Oakland, CA, US
 This system is an IoT solution to the problem of saving water and energy using ‘LinkLab’ technology.
 • Developed a web application using React.js, Redux, Node.js(Express.js), REST APIs, HTML, CSS and Cloudant DB.
 • Developed user dashboard using Bootstrap and React.js.
