@@ -8,12 +8,9 @@ class Topology extends Component {
 
   componentDidMount(){
     var that = this;
-    //setInterval(function() {
       that.props.fetchSensorDetails();
       that.props.fetchSensordata();
-      //document.body.innerHTML = ''
       drawTopology(that);
-    //}, 10000);
   }
 
 render() {

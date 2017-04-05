@@ -1,8 +1,21 @@
 
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../../actions';
+var axios = require('axios');
 
 class Weather extends Component{
+
+  componentDidMount(){
+    var that = this;
+    var today;
+    setInterval(function() {
+      that.props.fetchWeatherData();
+    }, 10000);
+  }
+
   render(){
+    var result = this.props.weatherData;
       return(
         <div className="col-md-6 col-sm-6 col-xs-12">
           <div className="x_panel">
@@ -48,17 +61,16 @@ class Weather extends Component{
               </div>
               <div className="col-sm-12">
                 <div className="weather-text pull-right">
-                  <h3 className="degrees">23</h3>
+                  <h3 className="degrees"></h3>
                 </div>
               </div>
 
               <div className="clearfix"></div>
-
               <div className="row weather-days">
                 <div className="col-sm-2">
                   <div className="daily-weather">
                     <h2 className="day">Mon</h2>
-                    <h3 className="degrees">25</h3>
+                    <h3 className="degrees">{result[1]}</h3>
                     <canvas id="clear-day" width="32" height="32"></canvas>
                     <h5>15 <i>km/h</i></h5>
                   </div>
@@ -112,4 +124,14 @@ class Weather extends Component{
   }
 }
 
-export default Weather;
+function mapStateToProps(state){
+
+  var data = state.auth.weatherdata;
+  var weatherData = [];
+  if (data) {
+    weatherData = data;
+  }
+  return {weatherData: weatherData};
+}
+
+export default connect(mapStateToProps, actions)(Weather);

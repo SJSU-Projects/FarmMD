@@ -34,7 +34,6 @@ class Graph extends Component {
   componentDidMount(){
     var that = this;
     setInterval(function() {
-      console.log('setTimeout on');
       that.props.fetchSensordata();
     }, 10000);
   }

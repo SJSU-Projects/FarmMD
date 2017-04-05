@@ -1,10 +1,26 @@
 import axios from 'axios';
 import { browserHistory } from 'react-router';
-import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, FETCH_MESSAGE, FETCH_SENSORDATA, FETCH_SENSORDETAILS } from './types';
+import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, FETCH_MESSAGE,
+         FETCH_SENSORDATA, FETCH_SENSORDETAILS, FETCH_WEATHERDATA } from './types';
 
 const ROOT_URL = 'http://localhost:3000';
 const sensorurl = `${ROOT_URL}/realtimedata`;
 const sensordetailsurl = `${ROOT_URL}/sensordetails`;
+const weatherdataurl = `${ROOT_URL}/weatherdata`;
+
+
+export function fetchWeatherData(){
+  return function(dispatch){
+    axios.get(weatherdataurl)
+    .then(response =>{
+      var result = response;
+      dispatch({
+        type: FETCH_WEATHERDATA,
+        payload: response.data
+      });
+    });
+  }
+}
 
 export function fetchSensorDetails(){
   return function(dispatch){

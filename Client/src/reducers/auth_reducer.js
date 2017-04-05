@@ -4,7 +4,8 @@ UNAUTH_USER,
 AUTH_ERROR,
 FETCH_MESSAGE,
 FETCH_SENSORDATA,
-FETCH_SENSORDETAILS
+FETCH_SENSORDETAILS,
+FETCH_WEATHERDATA
 }from '../actions/types';
 
 export default function(state = {}, action){
@@ -21,6 +22,8 @@ export default function(state = {}, action){
       return{...state, data: action.payload};
     case FETCH_SENSORDETAILS:
       return{...state, sensordetails: action.payload};
+    case FETCH_WEATHERDATA:
+      return{...state, weatherdata: action.payload};  
   }
   return state;
 }
