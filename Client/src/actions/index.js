@@ -2,16 +2,22 @@ import axios from 'axios';
 import { browserHistory } from 'react-router';
 import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, FETCH_MESSAGE,
          FETCH_SENSORDATA, FETCH_SENSORDETAILS, FETCH_WEATHERDATA } from './types';
+import { queryString } from 'querystring';
 
 const ROOT_URL = 'http://localhost:3000';
 const sensorurl = `${ROOT_URL}/realtimedata`;
 const sensordetailsurl = `${ROOT_URL}/sensordetails`;
 const weatherdataurl = `${ROOT_URL}/weatherdata`;
 
-
-export function fetchWeatherData(){
+export function fetchWeatherData(lat,long){
   return function(dispatch){
-    axios.get(weatherdataurl)
+    axios.post(weatherdataurl, queryString.stringify({
+
+      latitude: lat,
+      longitude: long
+
+  })
+)
     .then(response =>{
       var result = response;
       dispatch({

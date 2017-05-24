@@ -8,6 +8,7 @@ FETCH_SENSORDETAILS,
 FETCH_WEATHERDATA
 }from '../actions/types';
 
+//Define reducer state updations when different actions are performed
 export default function(state = {}, action){
   switch(action.type){
     case AUTH_USER:
@@ -23,7 +24,7 @@ export default function(state = {}, action){
     case FETCH_SENSORDETAILS:
       return{...state, sensordetails: action.payload};
     case FETCH_WEATHERDATA:
-      return{...state, weatherdata: action.payload};  
+      return{...state, weatherdata: action.payload};
   }
   return state;
 }

@@ -8,6 +8,7 @@ class Signin extends Component{
       this.props.signinUser({ email, password});
   }
 
+  //Render error message when authentication data is not correct
   renderAlert(){
     if(this.props.errorMessage){
       return(
@@ -36,10 +37,12 @@ class Signin extends Component{
   }
 }
 
+//Map state to properties which would be accessible by Sign In component
 function mapStateToProps(state){
   return {errorMessage: state.auth.error};
 }
 
+//Export form with actions
 export default reduxForm({
   form: 'signin',
   fields: ['email', 'password']

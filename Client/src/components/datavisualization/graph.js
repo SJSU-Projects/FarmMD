@@ -5,6 +5,7 @@ import * as actions from '../../actions';
 var LineChart = require('react-chartjs').Bar;
 var axios = require('axios');
 
+//Define border color
 const bgcolor = [
   'rgba(255,99,132,1)',
   'rgba(54, 162, 235, 1)',
@@ -12,6 +13,7 @@ const bgcolor = [
   'rgba(75, 192, 192, 1)',
 ];
 
+//Define background color
 const backgroundColor = [
   'rgba(255, 99, 132, 0.2)',
   'rgba(54, 162, 235, 0.2)',
@@ -19,6 +21,7 @@ const backgroundColor = [
   'rgba(75, 192, 192, 0.2)'
 ];
 
+//Define chartOptions
 const chartOptions =  {
   scales: {
     yAxes: [{
@@ -39,7 +42,6 @@ class Graph extends Component {
   }
 
   render() {
-    // move chart data out. only update data in function.
     var chartData = {
       labels: ["Temperature", "Salinity", "Moisture", "Humidity"],
       datasets: [{
@@ -56,6 +58,7 @@ class Graph extends Component {
   }
 }
 
+//Map state to properties which would be accessible by Graph component
 function mapStateToProps(state){
   var data = state.auth.data;
   let sensorData = [];

@@ -8,6 +8,7 @@ class Signup extends Component{
     this.props.signupUser(formProps);
   }
 
+  //Render error message when authentication data is not correct
   renderAlert(){
     if(this.props.errorMessage){
       return(
@@ -43,6 +44,7 @@ class Signup extends Component{
   }
 }
 
+//Peform input validation before sending the data to create a new user
 function validate(formProps){
   const errors = {};
 
@@ -62,6 +64,7 @@ function validate(formProps){
   return errors;
 }
 
+//Map state to properties which would be accessible by Sign Up component
 function mapStateToProps(state){
   return {errorMessage: state.auth.error};
 }

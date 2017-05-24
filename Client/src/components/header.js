@@ -5,6 +5,7 @@ import { Link } from 'react-router';
 
 class Header extends Component{
 
+//Display Header or Top Menu bar
   renderSigninText(){
     if(this.props.authenticated){
     return(
@@ -36,8 +37,10 @@ class Header extends Component{
   }
 }
 
+//Map state to properties which would be accessible by Home component
 function mapStateToProps(state){
   return {authenticated: state.auth.authenticated};
 }
 
+//Connect to common store
 export default connect(mapStateToProps) (Header);

@@ -10,7 +10,6 @@ class Home extends Component{
 
   render(){
     return(
-      //<div>hi</div>
       <div className="main_container">
         <div className="col-md-3 left_col">
           <div className="left_col scroll-view">
@@ -63,8 +62,10 @@ class Home extends Component{
   }
 }
 
+//Map state to properties which would be accessible by Home component
 function mapStateToProps(state){
   return {message: state.auth.message};
 }
 
+//Connect to common store
 export default connect(mapStateToProps,actions)(Home);

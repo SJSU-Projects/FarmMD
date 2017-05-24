@@ -22,12 +22,6 @@ return(<div ref='topology' id='vidya'>hi</div>);
 }
 
 function drawTopology(thisRef){
-
-
-    //jQuery.get("/sensorInfo", function(datares) {}).fail(function() {
-      //      alert("error");
-        //})
-        //.done(function(datares) {
         var topologyData= {
           };
           var flag = 0;
@@ -35,12 +29,6 @@ function drawTopology(thisRef){
           var sensorInfo;
 
            setInterval(function () {
-        //console.log('second passed');
-            //var sensorData;
-            //jQuery.get("/sensorRealTimeData", function(result) {}).fail(function() {
-            //alert("error");
-            //})
-            //.done(function(result) {
             var links = [];
             var nodes = [];
             var count = 50;
@@ -87,11 +75,7 @@ function drawTopology(thisRef){
             topologyData.nodes = nodes;
             topologyData.links = links;
             draw();
-        //});
         }, 10000);
-
-        //});
-
 
     function draw() {
       (function(nx) {
@@ -152,6 +136,7 @@ function drawTopology(thisRef){
 
 }
 
+//Map state to properties which would be accessible by Topology component
 function mapStateToProps(state){
   var data = state.auth.data;
   let sensorData = [];

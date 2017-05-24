@@ -24,6 +24,8 @@ const token = localStorage.getItem('token');
 if(token){
   store.dispatch({ type: AUTH_USER });
 }
+
+//Render routes main page 
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
@@ -31,7 +33,6 @@ ReactDOM.render(
         <Route path="signin" component={Signin}/>
         <Route path="signout" component={Signout}/>
         <Route path="signup" component={Signup}/>
-        //<Route path="graph" component={Graph}/>
         <Route path="topology" component={Topology}/>
         <Route path="home" component={RequireAuth(Home)}>
         <IndexRoute Component = { Graph}/>
