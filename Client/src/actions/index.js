@@ -9,15 +9,19 @@ const sensorurl = `${ROOT_URL}/realtimedata`;
 const sensordetailsurl = `${ROOT_URL}/sensordetails`;
 const weatherdataurl = `${ROOT_URL}/weatherdata`;
 
-export function fetchWeatherData(lat,long){
+//Display auth error
+function authError(error){
+  console.log('Auth error dispatched..');
+ return{
+   type: AUTH_ERROR,
+   payload: error
+ };
+}
+
+//Action to fetch weather data
+export function fetchWeatherData(){
   return function(dispatch){
-    axios.post(weatherdataurl, queryString.stringify({
-
-      latitude: lat,
-      longitude: long
-
-  })
-)
+    axios.get(weatherdataurl)
     .then(response =>{
       var result = response;
       dispatch({
@@ -28,14 +32,12 @@ export function fetchWeatherData(lat,long){
   }
 }
 
+//Action to fetch sensor details
 export function fetchSensorDetails(){
   return function(dispatch){
-    //console.log('Entered topology!');
-
     axios.get(sensordetailsurl)
     .then(response =>{
       var result = response;
-      //console.log("Sensor details org: " + response.data.rows[0].doc.SensorID);
       dispatch({
         type: FETCH_SENSORDETAILS,
         payload: response.data
@@ -44,16 +46,12 @@ export function fetchSensorDetails(){
   }
 }
 
-//Fecth the sensor data by using protected route
+//Action to fetch sensor real time data
 export function fetchSensordata(){
   return function(dispatch){
-  //  console.log('Entered fetch!');
-
     axios.get(sensorurl)
     .then(response =>{
       var result = response;
-      //var datares = [1,2,3,4];
-      //console.log("Response: " + result.data.rows[0].doc.data.temperature);
       dispatch({
         type: FETCH_SENSORDATA,
         payload: response.data
@@ -62,7 +60,7 @@ export function fetchSensordata(){
   }
 }
 
-//Fetch the message by using protected route
+//Action to fetch message
 export function fetchMessage(){
   return function(dispatch){
     axios.get(ROOT_URL, {
@@ -83,26 +81,28 @@ export function signupUser({email, password}){
     axios.post(`${ROOT_URL}/signup`, {email,password})
     .then(response => {
       dispatch({ type: AUTH_USER });
+      //Save the token to localStorage
       localStorage.setItem('token', response.data.token);
-      browserHistory.push('/Home');
+      //Push user to sign in with new credentials
+      browserHistory.push('/signin');
     })
-    .catch(response => dispatch(autheError(response.data.error)));
+    .catch(response => {
+      console.log('Error found!');
+      dispatch(authError(response.data))});
   }
 }
 
 export function signoutUser(){
   //Delete token from localStorage
   localStorage.removeItem('token');
-
-    //Set authetication flag = false
+  browserHistory.push('/signin');
+  //Set authetication flag = false
   return { type: UNAUTH_USER };
 }
 
 //Post the data and sign in user by returning the token
 export function signinUser({ email, password }){
   return function(dispatch){
-
-
       //Submit email/password to the server
     axios.post(`${ROOT_URL}/signin`, { email, password})
     .then(response => {
@@ -110,10 +110,10 @@ export function signinUser({ email, password }){
       //If request is good...
       //-update state to indicate user is authenticated
       //- Save JWT
-      //-redirect to the route '/feature'
+      //-redirect to the route '/home'
       dispatch({ type: AUTH_USER });
       localStorage.setItem('token',response.data.token);
-      browserHistory.push('/Home');
+      browserHistory.push('/home');
     })
     .catch(() => {
       //If request is bad
@@ -121,12 +121,4 @@ export function signinUser({ email, password }){
       dispatch(authError('Bad Login Info'));
     });
   }
-
-
- function authError(error){
-  return{
-    type: AUTH_ERROR,
-    payload: error
-  };
-}
 }

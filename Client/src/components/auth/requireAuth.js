@@ -21,7 +21,7 @@ export default function(ComposedComponent) {
         this.context.router.push('/');
       }
     }
-
+    
     render() {
       return <ComposedComponent {...this.props} />
     }
@@ -32,5 +32,6 @@ export default function(ComposedComponent) {
     return { authenticated: state.auth.authenticated };
   }
 
+  //Connect to redux store to get the data
   return connect(mapStateToProps)(Authentication);
 }

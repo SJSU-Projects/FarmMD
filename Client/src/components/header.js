@@ -5,14 +5,14 @@ import { Link } from 'react-router';
 
 class Header extends Component{
 
-//Display Header or Top Menu bar
+  //Display Header or Top Menu bar
   renderSigninText(){
     if(this.props.authenticated){
-    return(
+      return(
         <li className="nav-item">
-        <Link className="nav-link" to="/signout">Sign Out</Link>
-         </li>
-       );
+          <Link className="nav-link" to="/signout">Sign Out</Link>
+        </li>
+      );
     }
     else {
       return[

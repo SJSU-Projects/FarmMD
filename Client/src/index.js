@@ -10,7 +10,6 @@ import reducers from './reducers';
 import Signin from './components/auth/signin';
 import Signout from './components/auth/signout';
 import Signup from './components/auth/signup';
-import Graph from './components/datavisualization/graph';
 import Topology from './components/datavisualization/topology';
 import Home from './components/home';
 import RequireAuth from './components/auth/requireAuth';
@@ -23,9 +22,10 @@ const store =createStoreWithMiddleware(reducers);
 const token = localStorage.getItem('token');
 if(token){
   store.dispatch({ type: AUTH_USER });
+  //browserHistory.push('/home');
 }
 
-//Render routes main page 
+//Render routes main page
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
@@ -33,13 +33,9 @@ ReactDOM.render(
         <Route path="signin" component={Signin}/>
         <Route path="signout" component={Signout}/>
         <Route path="signup" component={Signup}/>
+        <Route path="home" component={Home}/>
         <Route path="topology" component={Topology}/>
-        <Route path="home" component={RequireAuth(Home)}>
-        <IndexRoute Component = { Graph}/>
-        </Route>
-        <Route path="weather" component={Weather}/>
-      <App/>
-    </Route>
-  </Router>
+      </Route>
+    </Router>
   </Provider>
-  , document.querySelector('.container'));
+  ,document.getElementById('main_container'));

@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
 import * as actions from '../../actions';
 
+const divStyle = {
+  margin:'0px 28px'
+};
+
 class Signup extends Component{
 
   handleFormSubmit(formProps){
@@ -12,34 +16,62 @@ class Signup extends Component{
   renderAlert(){
     if(this.props.errorMessage){
       return(
-          <div className="alert alert-danger">
-            <strong>{this.props.errorMessage}</strong>
-          </div>
+        <div className="alert alert-success">
+          <strong>{this.props.errorMessage}</strong>
+        </div>
       );
     }
   }
+
   render(){
     const { handleSubmit, fields: {email, password, passwordconfirm}} = this.props;
+
     return(
-      <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-        <fieldset className="form-group">
-          <label>Email</label>
-          <input className="form-control" {...email}/>
-          {email.touched && email.error && <div className="error">{email.error}</div>}
-        </fieldset>
-        <fieldset className="form-group">
-          <label>Password</label>
-          <input type="password" className="form-control" {...password}/>
-          {password.touched && password.error && <div className="error">{password.error}</div>}
-        </fieldset>
-        <fieldset className="form-group">
-          <label>Confirm Password</label>
-          <input type="password" className="form-control" {...passwordconfirm}/>
-          {passwordconfirm.touched && passwordconfirm.error && <div className="error">{passwordconfirm.error}</div>}
-        </fieldset>
-        {this.renderAlert()}
-        <button action="submit" className="btn btn-primary">Sign Up</button>
-      </form>
+      <div className="login_wrapper">
+        <div id="register" className="animate form login_form">
+          <section className="login_content">
+            <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))} className='ng-dirty ng-valid-parse ng-valid ng-valid-required'>
+              <img src="../../../../public/images/forisLogo_green.png" alt="Logo" height="42" width="150"align="middle" style={divStyle}></img>
+              <h1>Create Account</h1>
+
+              <div>
+                <input {...email} type="email" name="newuseremail" className="form-control" placeholder="Email"/>
+                {email.touched && email.error && <div className="error">{email.error}</div>}
+              </div>
+
+              <div>
+                <input {...password} type="password" name="newuserpassword" className="form-control" placeholder="Password"/>
+                {password.touched && password.error && <div className="error">{password.error}</div>}
+              </div>
+
+              <div>
+                <input {...passwordconfirm} type="password" name="newuserpassword" className="form-control" placeholder="Confirm Password" required="" ng-model="newuserpassword"/>
+                {passwordconfirm.touched && passwordconfirm.error && <div className="error">{passwordconfirm.error}</div>}
+              </div>
+
+              <div>
+                {this.renderAlert()}
+                <button action="submit" className="btn btn-primary">Sign Up</button>
+              </div>
+
+              <div className="clearfix"></div>
+
+              <div className="separator">
+                <p className="change_link">Already a member ?
+                  <a href="/signin" className="to_register"> Log in </a>
+                </p>
+
+                <div className="clearfix"></div>
+
+                <div>
+                  <h1><i>Foris.io</i> </h1>
+                  <p>© 2017  foris.io inc   Oakland, CA  94610     Privacy Policy    All Rights Reserved.</p>
+                </div>
+              </div>
+            </form>
+          </section>
+        </div>
+      </div>
     );
   }
 }
@@ -48,16 +80,17 @@ class Signup extends Component{
 function validate(formProps){
   const errors = {};
 
+  //Email validation
   if (!formProps.email) {
     errors.email = 'Please enter email';
   }
+  //Password validation
   if (!formProps.password) {
     errors.password = 'Please enter password';
   }
   if (!formProps.passwordconfirm) {
     errors.passwordconfirm = 'Please enter password confirmation';
   }
-  //xconsole.log(formProps);
   if(formProps.password !== formProps.passwordconfirm){
     errors.password = 'Password must be matching!';
   }
@@ -66,6 +99,7 @@ function validate(formProps){
 
 //Map state to properties which would be accessible by Sign Up component
 function mapStateToProps(state){
+  console.log('Error found in reducers', state.auth.error);
   return {errorMessage: state.auth.error};
 }
 

@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
+import Weather from './datavisualization/weather';
+import Graph from './datavisualization/salinitygraph';
+import MoistureGraph from './datavisualization/moisturegraph';
+import Header from './header';
 
 class Home extends Component{
 
@@ -9,191 +13,210 @@ class Home extends Component{
   }
 
   render(){
+    const divStyle = {
+      border: '0px'
+    };
+
+    const main_containerStyle = {
+      background:'#1a570f'
+    }
+
     return(
-       <div className="container body">
-         <div className="main_container">
-
-        <div className="top_nav">
-                <div className="nav_menu">
-                  <nav>
-                    <div className="nav toggle">
-                      <a id="menu_toggle"><i className="fa fa-bars"></i></a>
-                    </div>
-
-                    <ul className="nav navbar-nav navbar-right">
-                      <li className="">
-                        <a href="javascript:;" className="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                          <img src="../style/images/img.jpg"/>
-                          <span className=" fa fa-angle-down"></span>
-                        </a>
-                        <ul className="dropdown-menu dropdown-usermenu pull-right">
-                          <li><a href="javascript:;"> Profile</a></li>
-                          <li>
-                            <a href="javascript:;">
-                              <span className="badge bg-red pull-right">50%</span>
-                              <span>Settings</span>
-                            </a>
-                          </li>
-                          <li><a href="javascript:;">Help</a></li>
-                          <li><a type="submit" ng-click="logoutsession()" role="button"><i className="fa fa-sign-out pull-right"></i> Log Out</a></li>
-                        </ul>
-                      </li>
-
-
-                      <li role="presentation" className="dropdown">
-                        <a href="javascript:;" className="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                          <i className="fa fa-envelope-o"></i>
-                          <span className="badge bg-green"></span>
-                        </a>
-                        <ul id="menu1" className="dropdown-menu list-unstyled msg_list" role="menu">
-                          <li>
-                            <a>
-                              <span className="image"><img src="/images/img.jpg" alt="Profile Image" /></span>
-                              <span>
-                                <span>John Smith</span>
-                                <span className="time">3 mins ago</span>
-                              </span>
-                              <span className="message">
-                                Film festivals used to be do-or-die moments for movie makers. They were where...
-                              </span>
-                            </a>
-                          </li>
-                          <li>
-                            <a>
-                              <span className="image"><img src="/images/img.jpg" alt="Profile Image" /></span>
-                              <span>
-                                <span>John Smith</span>
-                                <span className="time">3 mins ago</span>
-                              </span>
-                              <span className="message">
-                                Film festivals used to be do-or-die moments for movie makers. They were where...
-                              </span>
-                            </a>
-                          </li>
-                          <li>
-                            <a>
-                              <span className="image"><img src="../../style/images/img.jpg" alt="Profile Image" /></span>
-                              <span>
-                                <span>John Smith</span>
-                                <span className="time">3 mins ago</span>
-                              </span>
-                              <span className="message">
-                                Film festivals used to be do-or-die moments for movie makers. They were where...
-                              </span>
-                            </a>
-                          </li>
-                          <li>
-                            <a>
-                              <span className="image"><img src="../../style/images/img.jpg" alt="Profile Image" /></span>
-                              <span>
-                                <span>John Smith</span>
-                                <span className="time">3 mins ago</span>
-                              </span>
-                              <span className="message">
-                                Film festivals used to be do-or-die moments for movie makers. They were where...
-                              </span>
-                            </a>
-                          </li>
-                          <li>
-                            <div className="text-center">
-                              <a>
-                                <strong>See All Alerts</strong>
-                                <i className="fa fa-angle-right"></i>
-                              </a>
-                            </div>
-                          </li>
-                        </ul>
-                      </li>
-                    </ul>
-                  </nav>
-                </div>
-              </div>
-
-               <div className="right_col" role="main">
-                <div className="row tile_count">
-                    <span className="count_top"><i className="fa fa-user"></i> Today's Average Temperature </span>
-                    <div className="count">2500</div>
-                    <span className="count_bottom"><i className="green">4% more</i> From last Week</span>
-                  <div className="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                    <span className="count_top"><i className="fa fa-sun-o"></i> Average Temperature</span>
-                    <div className="count" id="avg_temperature"> 53.6 &#8457;</div>
-                    <span className="count_bottom"><i className="red"><i className="fa fa-sort-asc"></i>3% </i> From last Week</span>
-                  </div>
-                    <span className="count_top"><i className="fa fa-cloud"></i> Average Humidity</span>
-                    <div className="count green">89%</div>
-                    <span className="count_bottom"><i className="green"><i className="fa fa-sort-asc"></i>16% </i> From last Week</span>
-                  <div className="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                    <span className="count_top"><i className="fa fa-tint"></i> Moisture Sensor</span>
-                    <div className="count green" id="avg_moisture">1023</div>
-                    <span className="count_bottom"><i className="green"><i className="fa fa-sort-asc"></i>20% </i> From last Week</span>
-                  </div>
-                  <div className="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                    <span className="count_top"><i className="fa fa-globe"></i> Soil Salinity</span>
-                    <div className="count" id="avg_salinity">963</div>
-                    <span className="count_bottom"><i className="red"><i className="fa fa-sort-desc"></i>12% </i> From last Week</span>
-                  </div>
-                  <div className="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                    <span className="count_top"><i className="fa fa-globe"></i> pH</span>
-                    <div className="count" id="avg_pH">6.00</div>
-                    <span className="count_bottom"><i className="red"><i className="fa fa-sort-asc"></i>1% </i> From last Week</span>
-                  </div>
-                    <span className="count_top"><i className="fa fa-user"></i> Total Connections</span>
-                    <div className="count">00.00</div>
-                    <span className="count_bottom"><i className="green"><i className="fa fa-sort-asc"></i>34% </i> From last Week</span>
-                </div>
-              </div>
-
-
+      <div className="main_container" style={main_containerStyle}>
         <div className="col-md-3 left_col">
           <div className="left_col scroll-view">
-            <div className="navbar nav_title">
-              <a href="/home" className="site_title"><span><img src="./style/images/forisLogo.png"/>
-              </span></a>
+            <div className="navbar nav_title" style={divStyle}>
+              <a href="index.html" className="site_title">
+                <img src="../../../public/images/forisLogo_green.png" alt="Logo" height="50" width="150"align="middle" style={divStyle}></img>
+              </a>
             </div>
-
             <div className="clearfix"></div>
-
-            <div className="profile">
-              <div className="profile_pic">
-                <img src="./style/images/img.jpg" className="img-circle profile_img"/>
-              </div>
-              <div className="profile_info">
-                <span>Welcome,</span>
-              </div>
-            </div>
-
-            <br />
-
             <div id="sidebar-menu" className="main_menu_side hidden-print main_menu">
               <div className="menu_section">
-                <h3>General</h3>
                 <ul className="nav side-menu">
                   <li><a><i className="fa fa-home"></i> Home <span className="fa fa-chevron-down"></span></a>
-                    <ul className="nav child_menu">
-                      <li><a href="/home">Dashboard</a></li>
-                      <li><a href="index3.php">Dashboard3</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i className="fa fa-table"></i> Sensors <span className="fa fa-chevron-down"></span></a>
-                    <ul className="nav child_menu">
-                      <li><a href="/water">Water Consumption</a></li>
-                      <li><a href="/moisture">Moisture</a></li>
-                      <li><a href="/temperature">Temperature</a></li>
-                      <li><a href="/humidity">Humidity</a></li>
-                      <li><a href="/pH">pH</a></li>
-                      <li><a href="/salinity">Salinity</a></li>
-                    </ul>
-                  </li>
-                  <li><a href="/sensortopology"><i className="fa fa-globe"></i> Sensor Topology</a></li>
+                  <ul className="nav child_menu">
+                    <li><a href="index.html">Dashboard</a></li>
+                    <li><a href="index2.html">Dashboard2</a></li>
+                    <li><a href="index3.html">Dashboard3</a></li>
+                  </ul>
+                </li>
+                <li><a><i className="fa fa-bar-chart-o"></i> Data Presentation <span className="fa fa-chevron-down"></span></a>
+                <ul className="nav child_menu">
+                  <li><a href="chartjs.html">Chart JS</a></li>
+                  <li><a href="chartjs2.html">Chart JS2</a></li>
+                  <li><a href="morisjs.html">Moris JS</a></li>
+                  <li><a href="echarts.html">ECharts</a></li>
+                  <li><a href="other_charts.html">Other Charts</a></li>
                 </ul>
-              </div>
-            </div>
-          </div>
+              </li>
+              <li><a href="http://localhost:8080/topology" target="_blank"><i className="fa fa-clone"></i>Sensor Topology<span className="fa fa-chevron-down"></span></a>
+              <ul className="nav child_menu">
+                <li><a href="fixed_sidebar.html">Fixed Sidebar</a></li>
+                <li><a href="fixed_footer.html">Fixed Footer</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div className="menu_section">
         </div>
       </div>
+      <div className="sidebar-footer hidden-small">
+        <a data-toggle="tooltip" data-placement="top" title="Settings">
+          <span className="glyphicon glyphicon-cog" aria-hidden="true"></span>
+        </a>
+        <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+          <span className="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+        </a>
+        <a data-toggle="tooltip" data-placement="top" title="Lock">
+          <span className="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+        </a>
+        <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+          <span className="glyphicon glyphicon-off" aria-hidden="true"></span>
+        </a>
+      </div>
     </div>
-    );
-  }
+  </div>
+  <div className="top_nav">
+    <div className="nav_menu">
+      <nav>
+        <div className="nav toggle">
+          <a id="menu_toggle"><i className="fa fa-bars"></i></a>
+        </div>
+
+        <ul className="nav navbar-nav navbar-right">
+          <li className="">
+            <Header></Header>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <div className="right_col" role="main">
+    <div className="">
+      <div className="page-title">
+        <div className="title_left">
+          <h3>Sensor Reading Extrapolation</h3>
+        </div>
+      </div>
+
+      <div className="clearfix"></div>
+
+      <div className="row">
+        <div className="col-md-6 col-sm-6 col-xs-12">
+          <div className="x_panel">
+            <div className="x_title">
+              <h2>Salinity avg value - 7 weeks<small>Sessions</small></h2>
+              <ul className="nav navbar-right panel_toolbox">
+                <li><a className="collapse-link"><i className="fa fa-chevron-up"></i></a>
+              </li>
+              <li className="dropdown">
+                <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i className="fa fa-wrench"></i></a>
+                <ul className="dropdown-menu" role="menu">
+                  <li><a href="#">Settings 1</a>
+                </li>
+                <li><a href="#">Settings 2</a>
+              </li>
+            </ul>
+          </li>
+          <li><a className="close-link"><i className="fa fa-close"></i></a>
+        </li>
+      </ul>
+      <div className="clearfix"></div>
+    </div>
+    <div className="x_content">
+      <Graph></Graph>
+    </div>
+  </div>
+</div>
+
+<div className="col-md-6 col-sm-6 col-xs-12">
+  <div className="x_panel">
+    <div className="x_title">
+      <h2>Mosture avg value - 7 weeks<small>Sessions</small></h2>
+      <ul className="nav navbar-right panel_toolbox">
+        <li><a className="collapse-link"><i className="fa fa-chevron-up"></i></a>
+      </li>
+      <li className="dropdown">
+        <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i className="fa fa-wrench"></i></a>
+        <ul className="dropdown-menu" role="menu">
+          <li><a href="#">Settings 1</a>
+        </li>
+        <li><a href="#">Settings 2</a>
+      </li>
+    </ul>
+  </li>
+  <li><a className="close-link"><i className="fa fa-close"></i></a>
+</li>
+</ul>
+<div className="clearfix"></div>
+</div>
+<div className="x_content">
+  <MoistureGraph></MoistureGraph>
+</div>
+</div>
+</div>
+</div>
+
+<div className="clearfix"></div>
+<div className="row">
+  <div className="col-md-6 col-sm-6 col-xs-12">
+    <div className="x_panel">
+      <div className="x_title">
+        <h2>Suggested Actions <small>Sample tasks</small></h2>
+        <ul className="nav navbar-right panel_toolbox">
+          <li><a className="collapse-link"><i className="fa fa-chevron-up"></i></a>
+        </li>
+        <li className="dropdown">
+          <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i className="fa fa-wrench"></i></a>
+          <ul className="dropdown-menu" role="menu">
+            <li><a href="#">Settings 1</a>
+          </li>
+          <li><a href="#">Settings 2</a>
+        </li>
+      </ul>
+    </li>
+    <li><a className="close-link"><i className="fa fa-close"></i></a>
+  </li>
+</ul>
+<div className="clearfix"></div>
+</div>
+<div className="x_content">
+
+  <ul className="to_do">
+    <li>
+      <p>
+        <input type="checkbox" className="flat"> Replace Device 104 East</input>
+      </p>
+    </li>
+    <li>
+      <p>
+        <input type="checkbox" className="flat">
+          pH levels are going down, check for different fertilizers</input>
+      </p>
+    </li>
+    <li>
+      <p>
+        <input type="checkbox" className="flat"> Water Bill Due in 20 days</input></p>
+      </li>
+      <li>
+        <p>
+          <input type="checkbox" className="flat"> Plan for next seasonal crop</input></p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<Weather/>
+</div>
+</div>
+</div>
+<footer>
+  <div className="clearfix"></div>
+</footer>
+</div>
+);
+}
 }
 
 //Map state to properties which would be accessible by Home component

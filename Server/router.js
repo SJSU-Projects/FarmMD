@@ -17,5 +17,5 @@ module.exports = function(app){
   app.post('/signin', requireSignIn, Authentication.signin);
   app.get('/realtimedata', SensorData.realtimedata);
   app.get('/sensordetails', SensorData.sensordetails);
-  app.post('/weatherdata', WeatherData.fetchWeatherData);
+  app.get('/weatherdata', WeatherData.fetchWeatherData);
 }

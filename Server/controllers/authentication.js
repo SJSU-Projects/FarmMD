@@ -15,7 +15,7 @@ exports.signup = function(req,res,next) {
   Users.checkExistingUser(req,res,function(err){
     if(err){
       console.log("Caller" + err);
-      res.send(err);
+      res.status(400).send(err);
     }
     else {
       Users.createUser(req, res, function(err, results) {

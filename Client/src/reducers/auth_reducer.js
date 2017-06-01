@@ -1,11 +1,11 @@
 import{
-AUTH_USER,
-UNAUTH_USER,
-AUTH_ERROR,
-FETCH_MESSAGE,
-FETCH_SENSORDATA,
-FETCH_SENSORDETAILS,
-FETCH_WEATHERDATA
+  AUTH_USER,
+  UNAUTH_USER,
+  AUTH_ERROR,
+  FETCH_MESSAGE,
+  FETCH_SENSORDATA,
+  FETCH_SENSORDETAILS,
+  FETCH_WEATHERDATA
 }from '../actions/types';
 
 //Define reducer state updations when different actions are performed

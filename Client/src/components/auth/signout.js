@@ -10,8 +10,9 @@ class Signout extends Component{
   }
 
   render() {
-    return <div> Sorry to see you go...</div>;
+    return <div></div>;
+    }
   }
-}
 
-export default connect(null, actions)(Signout);
+  //Connect to redux store to get the data
+  export default connect(null, actions)(Signout);
